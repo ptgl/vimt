@@ -1,0 +1,220 @@
+﻿@model Labixa.ViewModels.OrderTour
+
+
+<div class="container">
+    <div class="title has_fixed_background services ">
+
+
+    </div>
+    <div class="container_inner clearfix">
+
+        <div class="two_columns_75_25 background_color_sidebar grid2 clearfix">
+            <div class="column1">
+
+                <img src="@Model.product.ProductPictureMappings.Where(p=>!p.IsMainPicture).FirstOrDefault().Picture.Url" width="100%" height="100%" alt="Slide background" />
+                @*<div id="layerslider_tour" class="">
+                        foreach (var pictureMapping in Model.product.ProductPictureMappings.Where(p => !p.IsMainPicture))
+                        {
+                            if (!String.IsNullOrEmpty(@pictureMapping.Picture.Url))
+                            {
+                                <div class="ls-slide">
+                                    <img src="/Content/plugin/layerSlider/blank.gif" data-src="@pictureMapping.Picture.Url" class="ls-bg" alt="Slide background" />
+                                </div>
+                            }
+                            else
+                            {
+
+                            }
+
+                        }
+                        <div class="ls-slide">
+                                <img src="/Content/plugin/layerSlider/blank.gif" data-src="/Images/Tour/TourLanBien_00.jpg" class="ls-bg" alt="Slide background" />
+                            </div>
+                            <div class="ls-slide">
+                                <img src="/Content/plugin/layerSlider/blank.gif" data-src="/Images/Tour/TourLanBien_00.jpg" class="ls-bg" alt="Slide background" />
+                            </div><div class="ls-slide">
+                                      <img src="/Content/plugin/layerSlider/blank.gif" data-src="/Images/Tour/TourLanBien_00.jpg" class="ls-bg" alt="Slide background" />
+                                  </div>
+                            <div class="ls-slide">
+                                <img src="/Content/plugin/layerSlider/blank.gif" data-src="/Images/Tour/TourLanBien_00.jpg" class="ls-bg" alt="Slide background" />
+                            </div>
+                    </div>*@
+                <div class="column_inner clearfix lbx-border">
+
+                    <h3 class='title_with_line' style="font-size:22px;float:left">@Model.product.Name</h3><button data-toggle="modal" data-target="#ModalLabixa" style="float: right;text-decoration:none; border:none; background:rgb(244,244,244)">
+    <img src="/Images/bookingNow.png" style="height:35px;" />
+</button>
+                 
+
+                   
+                        <div class='title_with_line_separator'></div>
+
+
+                        <div class="tabs ">
+
+                            <div class="tabs-container">
+                                <div id="tab1" class="tab-content " style="padding-top: 0px;
+margin-top: -80px;">
+
+                                    @Html.Raw(Model.product.Content)
+
+                                </div>
+                                <div id="tab2" class="tab-content" style="margin-top: -80px">
+                                    @{
+                                        if (Model.product.ProductAttributeMappings != null)
+                                        {
+                                            var productAttributeMapping = Model.product.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 8);
+                                            if (productAttributeMapping != null)
+                                            {
+                                                @Html.Raw(productAttributeMapping.Value)
+                                            }
+                                        }
+                                    }
+                                </div>
+                                <div id="tab3" class="tab-content" style="margin-top: -80px">
+                                    @{
+                                        if (Model.product.ProductAttributeMappings != null)
+                                        {
+                                            var productAttributeMapping = Model.product.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 9);
+                                            if (productAttributeMapping != null)
+                                            {
+                                                @Html.Raw(productAttributeMapping.Value)
+                                            }
+                                        }
+                                    }
+
+                                </div>
+                                <div id="tab4" class="tab-content" style="margin-top: -80px">
+                                    @{
+                                        if (Model.product.ProductAttributeMappings != null)
+                                        {
+                                            var productAttributeMapping = Model.product.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 10);
+                                            if (productAttributeMapping != null)
+                                            {
+                                                @Html.Raw(productAttributeMapping.Value)
+                                            }
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <h3 class='title_with_line'>Tour liên quan</h3><div class='title_with_line_separator'></div>
+                        <div class="projects_holder projects_type2 v3">
+                            @{
+                                var ListTour = (List<Outsourcing.Data.Models.Product>)ViewBag.TourRelation;
+                                foreach (var item in ListTour)
+                                {
+                                    <article class="mix island  mix_all" style="display: inline-block; opacity: 1;">
+                                        <div class="image">
+                                            <div class="hover-type-text">
+                                                <div class="hover-inner">
+                                                    <a href="/tour-labixa/@item.Slug" class="hover-inner-link">
+                                                        <h4 class="portfolio_title">Thông tin dịch vụ</h4>
+                                                        @if (item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 12).Value.ToString().ToLower().Equals("true") && item.Price != null)
+                                                        {
+                                                            <br><p>Khuyến Mãi: @item.Price.ToString("##,###,##0") đ</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <br><p>Chi phí: @item.Price.ToString("##,###,##0") đ</p>}
+                                                    </a>
+                                                    <a class="preview" title="Melbourne Identity" href="@item.ProductPictureMappings.FirstOrDefault(p => p.IsMainPicture)" data-rel="prettyPhoto[pretty_photo_gallery]" rel="prettyPhoto[pretty_photo_gallery]"></a>
+                                                </div>
+                                            </div><a href="/tour-labixa/@item.Slug"><img width="424" height="318" src="@item.ProductPictureMappings.FirstOrDefault(p => p.IsMainPicture).Picture.Url" class=" " alt="02"></a>
+                                        </div>
+                                        <h4 style="text-align: -webkit-left;">
+                                            @item.Name
+                                        </h4>
+                                    </article>
+                                }
+                            }
+                        </div>
+
+</div>
+
+            </div>
+            @Html.Partial("_Sidebar")
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<!--Booking form-->
+@*<div class="modal fade" id="ModalLabixa">
+        <div class="modal-dialog">
+            <button type="button" class="close" data-dismiss="modal" style="background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    right: -25px;
+    top: -30px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form action="/Order/CreateOrder" method="post">
+                        <table>
+                            <tr>
+                                <td>Tên Khách Hàng: </td>
+                                <td><input type="text" class="col-xs-12 col-md-8" name="CustomerName"></td>
+                            </tr>
+                            <tr>
+                                <td>Địa Chỉ: </td>
+                                <td><input type="text" class="col-xs-12 col-md-8" name="CustomerAddress"></td>
+                            </tr>
+                            <tr>
+                                <td>Số Điện Thoại: </td>
+                                <td><input type="text" class="col-xs-12 col-md-8" name="CustomerPhone"></td>
+                            </tr>
+                            <tr>
+                                <td>Email: </td>
+                                <td><input type="text" class="col-xs-12 col-md-8" name="CustomerEmail"></td>
+                            </tr>
+                            <tr>
+                                <td>Ghi Chú: </td>
+                                <td><textarea class="col-xs-12 col-md-8" name="Note" cols="20" rows="3"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Số Lượng: </td>
+                                <td><input type="number" class="col-xs-12 col-md-8" name="Quantity"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" value="Đặt Tour" class="btn btn-success" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->*@
+
+
+<script>
+    jQuery(window).load(function () {
+        jQuery("#layerslider_tour").layerSlider({
+            width: '100%',
+            height: '400px',
+            skinsPath: '/Content/plugin/layerSlider/skins/',
+            showBarTimer: false,
+            showCircleTimer: false,
+            hoverPrevNext: true,
+            hoverBottomNav: true,
+        });
+    });
+
+    function toggleBooking(id) {
+        //$('#modal fade').modal('toggle');
+        $('#modal fade').modal('show');
+    }
+</script>

@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Style/Common")
+    @Scripts.Render("~/Scripts/Common")
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+    <link rel="stylesheet" href="/Content/style.css">
+    <title>login</title>
+</head>
+<body>
+    @*<span class="button" id="toggle-login">Log in</span>*@
+    <img src="/Images/Intel Logo White.png" style="width:150px;height:100px" />
+    <div id="login">  
+        <h1>VIMT</h1>
+       
+        <form>
+            
+                <select class="list">
+                    <option value="requestor">Requestor</option>
+                    <option value="requestor manager">Requestor Manager</option>
+                    <option value="accountant">Accountant</option>
+                    <option value="accountant manager">Accountant Manager</option>
+                    <option value="super user">Super User</option>
+                </select>
+           
+            <input class="btn-info" type="submit" value="Log in" />
+        </form>
+    </div>
+    @*<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/Content/index.js"></script>*@
+
+
+</body>
+</html>

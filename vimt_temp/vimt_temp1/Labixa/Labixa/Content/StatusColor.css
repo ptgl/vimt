@@ -1,0 +1,30 @@
+﻿.waiting-for-collect{
+    background-color:rgb(0, 153, 255);  /*blue*/
+    color: rgb(255, 255, 230)
+}
+.pending-for-signature{
+    background-color:rgb(255, 102, 255) /*pink*/;
+    color: rgb(255, 255, 230)
+}
+.pending-for-validation{
+    background-color:rgb(255, 153, 51)  /*orange*/;
+    color: rgb(255, 255, 230)
+}
+.pending-for-approve{
+    background-color:brown;
+    color: rgb(255, 255, 230)
+}
+.waiting-for-payment{
+    background-color:rgb(230, 230, 0); /*yellow*/
+    color: rgb(255, 255, 230)
+}
+.done{
+    background-color:rgb(0, 204, 0); /*green*/
+    color: rgb(255, 255, 230)
+}
+.false{
+}
+.true{
+
+    color: red ;
+}

@@ -1,0 +1,188 @@
+/*
+
+Uniform Theme: Uniform Default
+Version: 1.8
+By: Josh Pyles
+License: MIT License
+---
+For use with the Uniform plugin:
+http://uniformjs.com/
+
+*/
+/* General settings */
+div.selector, div.selector span, div.checker span, div.radio span, div.uploader, div.uploader span.action, div.button, div.button span {
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased; }
+div.selector, div.checker, div.button, div.radio, div.uploader {
+  display: -moz-inline-box;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: middle;
+  /* Keeping this as :focus to remove browser styles */ }
+  div.selector:focus, div.checker:focus, div.button:focus, div.radio:focus, div.uploader:focus {
+    outline: 0; }
+div.selector, div.selector *, div.radio, div.radio *, div.checker, div.checker *, div.uploader, div.uploader *, div.button, div.button * {
+  margin: 0;
+  padding: 0; }
+
+
+/* Radio */
+  div.radio {
+    position: relative; 
+  }
+  div.radio, 
+  div.radio span, 
+  div.radio input {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+  }
+  div.radio span {
+    background: url(../images/icon/radio_bg.png);
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    height: 12px;
+    width: 12px;
+    background-position: 0 0; 
+  }
+  div.radio span.checked {
+    background-position: 0 -12px; 
+  }
+  div.radio input{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center; 
+  }
+  div.radio.active span.checked {
+    background-position: 0 -12px; }
+  /*s radio*/
+  .s_result div.radio {
+    position: relative; 
+  }
+  .s_result div.radio, div.radio span, div.radio input {
+    width: 20px;
+    height: 20px; 
+    cursor: pointer;
+  }
+  .s_result div.radio span {
+    background: url(../images/icon/radio_s.png);
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    background-position: 0 0; 
+  }
+  .s_result div.radio span.checked {
+    background-position: 0 -20px;
+  }
+  .s_result div.radio input {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center; 
+  }
+  
+  .s_result div.radio.active span.checked {
+    background-position: 0 -20px; 
+  }
+/**/
+  .s_r div.radio {
+    position: relative; 
+  }
+  .s_r div.radio, div.radio span, div.radio input {
+    width: 15px;
+    height: 15px; 
+    cursor: pointer;
+  }
+  .s_r div.radio span {
+    background: url(../images/icon/radio.png);
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    background-position: 0 0; 
+  }
+  .s_r div.radio span.checked {
+    background-position: 0 -15px;
+  }
+  .s_r div.radio input {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center; 
+  }
+  
+  .s_r div.radio.active span.checked {
+    background-position: 0 -15px; 
+  }
+
+/* Checkbox */
+div.checker {
+  
+  position: relative; }
+  div.checker, div.checker span, div.checker input {
+    width: 12px;
+    height: 12px; }
+  div.checker span {
+	background: url(../images/icon/radio_bg.png);
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+	height: 12px;
+	width: 12px;
+    background-position: 0 0; }
+    div.checker span.checked {
+      background-position: 0 -12px; }
+  div.checker input {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center; }
+  
+    div.checker.active span.checked {
+      background-position: 0 -12px; }
+
+/* Checker */
+div.checker {
+  margin-right: 5px; }
+
+/* Radio */
+div.radio {
+  margin-right: 3px; }

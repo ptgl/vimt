@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.ItemVendor>
+
+<table id="productTable" class="table table-bordered table-striped table-fixed-header">
+    <thead>
+        <tr role="row">
+            <th>STT</th>
+            @*<th>Vendor</th>*@
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Unit</th>
+           
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        @if (true)
+        {
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr class="odd">
+                    <td class=" sorting_1">@count</td>
+                    @*<td class="hidden-480 ">@item.Vendor.VendorName</td>*@
+                    <td class="hidden-480 ">@item.ItemName</td>
+                    <td class="hidden-480 ">@item.Price</td>
+                    <td class="hidden-480 ">@item.Unit</td>
+
+                 
+                </tr>
+            }
+        }
+    </tbody>
+</table>

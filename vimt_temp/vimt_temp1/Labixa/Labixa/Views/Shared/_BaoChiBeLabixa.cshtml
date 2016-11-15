@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.Blog>
+@for (int i = 0; i < Model.Count(); i++) { 
+    <div class="column@(i+1)">
+        <div class="column_inner">
+            <img class="" alt="i" src="@Model.ToList()[i].BlogImage" width="320" height="180"><p></p>
+            <a href="/tin-tuc-su-kien/@Model.ToList()[i].Slug"><h4 style="margin-top: 18px;">@Model.ToList()[i].Title</h4></a>
+            <p>
+                @Model.ToList()[i].Description
+            </p>
+        </div>
+
+    </div>
+}

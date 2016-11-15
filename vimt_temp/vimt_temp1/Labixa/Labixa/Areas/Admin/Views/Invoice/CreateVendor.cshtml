@@ -1,0 +1,267 @@
+﻿@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@{
+    var role = Session["role"].ToString().ToLower();
+}
+@model Labixa.Areas.Admin.ViewModel.InvoiceViewModel
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/Invoice">Add New Invoice</a>
+                @*<a href="/Admin/Product">Manage Invoice</a>*@
+            </li>
+            <li class="active">Add Vendor</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<div class="alert alert-block alert-info">
+                    Add new invoice
+                </div>*@
+            @*@using (Html.BeginForm("CreateVendor", "Invoice", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {*@
+                <form action="/Invoice/CreateVendor" id="form" class="form-horizontal" method="post" onsubmit="" @*onsubmit="return check();"*@>  
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                Vendor
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+
+                            @*@Html.DisplayNameFor(model => model.ListVendors)*@
+                            Vendor Name:
+                            <div class="form-group ">
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.VendorId, Model.ListVendors, new { @class = "col-sm-9" })
+                                </div>
+                            </div>
+                           
+
+
+                            Option:
+                            <div class="form-group">
+                               <div class="col-sm-9">
+                                   @Html.DropDownListFor(model => model.option, Model.ListOptions)
+                               </div>                       
+                            </div>
+
+                            @if(Session["role"].ToString().ToLower().Equals("accountant"))
+                            {
+                            <p> Invoice ID:</p>
+                              <div class="form-group">
+                                <div class="col-sm-9">
+                                    @*@Html.TextBoxFor(model => model.InvoiceId, new { id = "invoiceId"}) **@
+                                    <input id="invoiceId" name="InvoiceId" type="text" placeholder="TM/12P0000371" onkeyup="check()">
+                                 
+                                   <br/> <p id="error" style="color:red"></p>
+                                </div>
+                             
+                            </div>                           
+                            }
+                           
+                          <script>
+
+                              function check() {
+                                  var st = "" + $("#invoiceId").val();
+                                  var error = $("#error");
+                                  var patt = new RegExp("[A-Z]{2}/[0-9]{2}[A-Z][0-9]{7}");
+                                  //var patt = new RegExp("TM/[0-9]{2}P[0-9]{3}");
+
+                                  if (st.length < 13 || st.length > 13) {
+                                      //alert("Invoice Id must have 13 characters")
+                                      error.text("Invoice Id must have 13 characters")
+                                      return false
+                                  }
+                                  else if (!patt.test(st)) {
+                                      //alert("Invoice Id is in wrong format")
+                                      error.text("Invoice Id is in wrong format. Right format is TM/12P0000371 ")
+                                      return false;
+                                  }
+                                  else error.text("");
+                                  return true;
+                              }
+
+                              
+                              $(function () {
+                                  
+                                  var role = '@Session["role"].ToString().ToLower()';
+                                  if (role === "accountant") {
+                                      //  $("#form").submit(check());
+                                      $("#form").attr("onsubmit", "return check();");
+                                  }
+                              });
+
+
+
+
+                          </script>
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        @*
+                            partial for group button
+                        *@
+                        @Html.Partial("_PartialButtonGroup", "/Invoice")
+
+
+
+                        @*@if (role.Equals("accountant") || role.Equals("requestor"))
+                        {
+
+                            @:&nbsp;&nbsp; &nbsp;
+                                if (Model.URL.ToString().Equals(""))
+                                {
+                                    <button type="button" id="open-frmUpload" class="btn btn-danger">
+                                        Upload
+                                    </button>
+                                }
+
+
+                                @:&nbsp; &nbsp; &nbsp;
+                                 if (!Model.URL.ToString().Equals(""))
+                                 {
+                                    <a href="/Invoice/DeleteFile?fileName=@Model.fileName&key=@Model.Id" class="btn btn-info" onclick="return confirm('Are you sure that you want to delete?');">Delete File</a>
+                                       }
+
+
+                        }*@
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                 </form>   @*}*@
+
+            </div>
+        </div>
+    </div>
+                
+      
+
+<div id="frmUpload">
+    @using (Html.BeginForm("Upload", "Invoice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        @Html.TextBoxFor(model => model.file, new { type = "file" })
+        @Html.ValidationMessageFor(model => model.file, "")
+        @Html.HiddenFor(model => model.InvoiceId)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Description)
+        <input type="submit" id="btnUpload" name="btnUpload" value="Upload" />
+    }
+</div>
+          
+                
+                
+    <script>
+
+
+
+
+        $(function () {
+
+            $("#frmUpload").dialog({
+                autoOpen: false,
+                //modal: true,
+                width: 445,
+                height: 230,
+                //buttons: { OK: function () { $(this).dialog("close");}},
+            });
+
+
+            $("#open-frmUpload").click(function () {
+
+                $("#frmUpload").dialog("open");
+            });
+
+        });
+
+
+
+        function insertItem() {
+            var productId = $("#productId").val();
+            var Quantity = $("#Quantity").val();
+            var orderId = $("#Id").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Order/CreateItem",
+                data: { prodId: productId, Quan: Quantity, order: orderId },
+                success: function (data) {
+                    $(".item-list").html(data),
+                    $('.summ').each(function () {
+                        calculateSum();
+                    });
+                },
+            });
+            function calculateSum() {
+                var sum = 0;
+                $(".summ").each(function () {
+
+                    var value = $(this).text();
+                    // add only if the value is number
+                    if (!isNaN(value) && value.length != 0) {
+                        sum += parseFloat(value);
+                    }
+                });
+
+                $('#OrderTotal').val(sum);
+
+            }
+
+        }
+        $("#VendorId").change(function () {
+            @*var vendorId = $("#VendorId").val();
+            var address = @Model.ListVendors.Where(p => p.Value == vendorI).FirstOrDefault().Text;
+            $("#CustomerAddress").val(address);
+            $("#CustomerPhone").val("0303907051");*@
+
+        });
+
+
+        $('#invOption').on('change', function () {
+            alert(this.value); // or $(this).val()
+            @Model.option  $(this).val().toString();
+        });
+
+
+
+
+    </script>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.OrderItem>
+          @using Outsourcing.Core.Common;
+;
+<table id="productTable" class="table table-bordered table-striped table-fixed-header" style="  width: 50%;
+  margin: 0 auto;">
+    <thead>
+        <tr role="row">
+            <th>Product Name</th>
+            <th>Unit</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+       
+        @foreach (var item in Model)
+            {
+            <tr class="odd">
+                <td class="hidden-480 ">@item.Product.Name</td>
+                <td class="hidden-480 ">@item.Product.Description</td>
+                <td class="hidden-480 ">@item.Quantity</td>
+                <td class="hidden-480 ">@item.Price</td>
+                <td class="hidden-480 summ">@StringConvert.product(item.Quantity, item.Price)</td>
+            </tr>
+            }
+    </tbody>
+</table>

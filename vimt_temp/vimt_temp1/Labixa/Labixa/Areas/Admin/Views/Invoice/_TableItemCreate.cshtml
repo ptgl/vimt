@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.InvoiceItem>
+<table id="productTable" class="table table-bordered table-striped table-fixed-header">
+    <thead>
+        <tr role="row">
+            <th>No</th>
+            <th>Name of Commodity, Service</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        @if (Model != null)
+        {
+            int count = 0;
+            //double sumM = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                //sumM += slitString.sum(item.Quantity, item.ItemVendor.Price);
+                <tr class="odd">
+                    <td class=" sorting_1">@count</td>
+                   
+                    @*<td class="hidden-480 ">@item.ItemVendor.ItemName</td>*@
+                    <td class="hidden-480 ">@item.Description</td>
+                    <td class="hidden-480 ">@item.Quantity</td>
+                    @{
+                          var unit = Outsourcing.Core.Common.StringConvert.divide(item.totalPrice, item.Quantity);
+                    }
+                    @*<td class="hidden-480 ">@item.ItemVendor.Price.ToString("##,###,##0")</td>*@
+                    <td class="hidden-480 ">@unit</td>
+                 
+                        @*<td class="">@Outsourcing.Core.Common.slitString.sum(item.Quantity, item.ItemVendor.Price).ToString("##,###,##0")</td>*@
+                    <td class="">@item.totalPrice.ToString("##,###,##0")</td>
+                       
+                
+                </tr>
+            }
+            @*<tr>
+                    <td class="" style="border-bottom:solid 0px"></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""><b>Total payable</b></td>
+                    <td class="hidden-480 ">@sumM.ToString("##,###,##0")</td>
+                </tr>*@
+            
+            
+           
+        
+          <p id="test"></p>      
+            
+            
+        }
+    </tbody>
+</table>
+
+<script>
+    
+    var count = @Model.Count()
+      
+
+    $(document).ready(function () {
+       
+        if (count >= 6) {
+            $("#save").hide();
+        }
+    });
+
+
+       
+</script>

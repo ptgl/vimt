@@ -1,0 +1,47 @@
+﻿@model Outsourcing.Data.Models.Blog
+<div class="container">
+    <!--TOUR -->
+
+    <div class="title has_fixed_background services ">
+        
+    </div>
+    <div class="container_inner clearfix">
+
+        <div class="two_columns_75_25 background_color_sidebar grid2 clearfix">
+            <div class="column1">
+
+                <div class="column_inner lbx-border">
+                    <div class="blog_single_holder">
+                        <article>
+
+                            <div class="blog_title_holder">
+                                <h3 class="title_with_line">@Model.Title</h3>
+                            </div>
+                            <span>
+                                Đăng vào lúc:  @Model.LastEditedTime.ToShortDateString()
+                            </span>
+                            <div class="blog_single_text_holder">
+                                <div class="text">
+
+                                    @Html.Raw(Model.Content)
+
+                                </div>
+
+
+                            </div>
+                        </article>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            @Html.Partial("_Sidebar")
+        </div>
+    </div>
+
+    <!--END TOUR -->
+</div>

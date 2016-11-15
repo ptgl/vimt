@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+@model Outsourcing.Data.Models.Blog
+<div class="content" style="min-height: 775px;">
+    <div class="content_inner  " style="position: relative; visibility: visible; display: block;">
+
+
+
+
+        <div class="google_map" id="map_canvas">
+
+        </div>
+    
+        <div class="container">
+            <div class="container_inner clearfix">
+                <div class="contact_detail">
+
+                    <div class="two_columns_50_50 clearfix">
+                        <div class="column1">
+                            <div class="column_inner">
+                                <div class="contact_form">
+                                    <h4>LIÊN HỆ</h4>
+                                    <form id="contact-form" method="post" action="">
+
+                                        <input type="text" class="requiredField placeholder" name="fname" id="fname" value="" placeholder="Tên *">
+                                        <input type="text" class="requiredField placeholder" name="lname" id="lname" value="" placeholder="Last Name *">
+
+                                        <input type="text" class="requiredField email placeholder" name="email" id="email" value="" placeholder="Email *">
+                                        <input type="hidden" name="website" id="website" value="">
+
+                                        <textarea name="message" id="message" rows="10" placeholder="Tin nhắn" class="placeholder"></textarea>
+
+
+                                        <span class="submit_button">
+                                            <input class="button small" type="submit" value="Gửi">
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column2">
+                            <div class="column_inner">
+                                <div class="contact_info">
+                                    @*@Html.Action("ContactInfo","Home")*@
+                                    @Html.Raw(Model.Content)
+                                   
+                                    <p>&nbsp;</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator transparent"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+

@@ -1,0 +1,122 @@
+﻿@*@model PagedList.IPagedList<Outsourcing.Data.Models.Product>*@
+@model Labixa.ViewModels.TourModels
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="container" style="background: rgb(244,244,244)">
+    <!--TOUR -->
+
+    <div class="title has_fixed_background services " >
+
+    </div>
+    <div class="container_inner clearfix">
+        <div class="column_inner">
+            @*<div class='filter_holder'>
+                    <ul>
+                        <li class='label'>
+                            <span data-label='Labixa - top dịch vụ'>Tour Labixa</span>
+                            <div class='arrow'></div>
+                        </li>
+                        <li class='filter' data-filter='all'><span>Xem hết</span></li>
+                        <li class='filter' data-filter='island'><span>Tour biển đảo</span></li>
+                        <li class='filter' data-filter='diving'><span>Tour lặn biển</span></li>
+                        <li class='filter' data-filter='game'><span>Team Building</span></li>
+                        <li class='filter' data-filter='explore'><span>Khám phá</span></li>
+                    </ul>
+                </div>*@
+            <div class='projects_holder_outer'>
+                <div class='projects_holder projects_type2 v3'>
+                    @foreach (var item in Model.ListProduct.OrderBy(p => p.Position))
+                    {
+                        var Url = "";
+                        var productPictureMapping = item.ProductPictureMappings.FirstOrDefault(p => p.IsMainPicture);
+                        if (productPictureMapping != null)
+                        {
+                            Url = productPictureMapping.Picture.Url;
+                        }
+                        <article class='mix island '>
+                            <div class='image'>
+                                <div style="z-index: 999; top: 0px; right: 0px; overflow: visible">
+                                    @if (item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 12).Value.ToString().ToLower().Equals("true") && item.Price != null)
+                                    {
+                                        <img src="~/Content/khuyenmai-01.png" style="max-height: 100px; max-width: 100px; position: absolute; top: -4px; left: -4px; " />
+                                    }
+                                    else
+                                    {
+                                        if (item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 11).Value.ToString().ToLower().Equals("true") && item.Price != null)
+                                        {
+                                            <img src="~/Content/hot-icon.gif" style="max-width: 122px; max-height: 68px; position: absolute; top: -4px; left: -4px; " />
+                                        }
+                                    }
+
+                                </div>
+                                @*@{
+                                    var obj = item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 11);
+                                    if (obj != null && obj.Value.ToLower().Equals("true"))
+                                    {
+                                        <div class="hottour">
+                                            <p>
+                                                Hot Tour
+                                            </p>
+                                        </div>
+                                    }
+                                    var obj2 = item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 12);
+                                    if (obj2 != null && obj2.Value.ToLower().Equals("true"))
+                                    {
+                                        <div class="promotion">
+                                            <p>
+                                                Khuyến Mãi
+                                            </p>
+                                        </div>
+                                    }
+                                            }*@
+
+                                <div class='hover-type-text'>
+                                    <div class='hover-inner'>
+                                        <a href='/tour-labixa/@item.Slug' class='hover-inner-link'>
+                                            <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+
+                                            @if (item.ProductAttributeMappings.FirstOrDefault(p => p.ProductAttributeId == 12).Value.ToString().ToLower().Equals("true") && item.Price != null)
+                                            {
+                                                <br /><p style="text-decoration:line-through">Chi phí: @item.OldPrice.ToString("##,###,##0") đ</p>
+                                                <p>Khuyến Mãi: @item.Price.ToString("##,###,##0") đ</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Chi Phí: @item.Price.ToString("##,###,##0") đ</p>
+                                            }
+                                        </a>
+                                        <a class='preview' title='@item.Name' href='/tour-labixa/@item.Slug'></a>
+                                    </div>
+                                </div><a href='/tour-labixa/@item.Slug'>
+                                    <img width="424" height="300" src="@Url" class=" " alt="02" />
+                                </a> 
+                            </div><h4>
+                                @item.Name
+
+                            </h4>
+                        </article>
+                    }
+                    <div class='filler'></div>
+                    <div class='filler'></div>
+                </div>
+                @*<div class="portfolio_paging">
+                        <span rel="2" class="load_more">
+                            <a href="#">Xem các tour hấp dẫn khác </a>
+                        </span>
+                    </div>*@
+            </div>
+
+            <div style="margin-top:30px;margin-bottom:30px;background-color: transparent;" class="separator"></div>
+            <div>
+
+                Trang @(Model.ListProduct.PageCount < Model.ListProduct.PageNumber ? 0 : Model.ListProduct.PageNumber) của @Model.ListProduct.PageCount
+
+                @Html.PagedListPager(Model.ListProduct, page => Url.Action("HomePageTour", new { page, slug = ViewBag.slug, currentFilter = ViewBag.CurrentFilter }))
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--END TOUR -->
+</div>

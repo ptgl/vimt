@@ -1,0 +1,163 @@
+﻿@model Labixa.Areas.Admin.ViewModel.InvoiceViewModel
+@using Outsourcing.Core.Common;
+
+
+@*<h1>@Model.listInvoices.FirstOrDefault().Id</h1>*@
+
+<table id="productTable" class="table table-bordered table-striped table-fixed-header">
+    <thead>
+        <tr role="row">
+            @*<th>STT</th>*@
+            <th>Status</th>
+            <th>Invoices amount</th>
+            @*<th>Status</th>*@
+
+
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+      
+          
+
+       
+
+           @foreach (var obj in Model.listStatuses)
+            {
+                //count++;
+                <tr class="odd">
+
+                    @*<td class=" sorting_1">@count</td>*@
+                    <td class="hidden-480 ">@obj.StatusName</td>
+
+
+                    <td class="hidden-480 ">@Model.listInvoices.Where(p => p.UserInvoices.LastOrDefault().StatusId == obj.Id && p.isDelete == false && p.UserInvoices.LastOrDefault().isReject == false).Count()</td>
+
+                </tr>
+            }
+
+
+        <tr class="odd">
+            <td class="hidden-480 ">Reject</td>
+            <td class="hidden-480 ">@Model.listInvoices.Where(p => p.UserInvoices.LastOrDefault().isReject == true).Count()</td>
+        </tr>
+
+        <tr class="odd">
+            <td class="hidden-480 ">Cancelled</td>
+            <td class="hidden-480 ">@Model.listInvoices.Where(p => p.isDelete == true).Count()</td>
+        </tr>
+
+        
+
+
+
+
+        
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<table id="productTable" class="table table-bordered table-striped table-fixed-header">
+    <thead>
+        <tr role="row">
+            <th>STT</th>
+            <th>Vendor Name</th>
+            <th>Total Payment</th>
+            <th>WWID Request</th>
+            <th>Status</th>
+            <th>Is CDS</th>
+            <th>Create Date</th>
+            @*<th>Status</th>*@
+
+
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        @if (Model.listInvoices.Count() > 0)
+        {
+            int count = 0;
+            foreach (var item in Model.listInvoices)
+            {
+                count++;
+                <tr class="odd">
+                    @{
+                String isReject = item.UserInvoices.LastOrDefault().isReject.ToString();
+                isReject = StringConvert.ConvertShortName(isReject);
+
+
+                    }
+                    <td class=" sorting_1">@count</td>
+                    <td class="hidden-480 ">@item.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName</td>
+                    @{
+                double money = double.Parse(item.totalPayment.ToString());
+                String convert = MoneyConvert.So_chu(money);
+                    }
+
+                    <td class="hidden-480 ">@item.totalPayment.ToString("##,###,##0")<br />@*(@convert)*@</td>
+                    @*<td class="hidden-480 ">@item.UserInvoices.FirstOrDefault().UserTable.WWID</td>*@
+                    <td class="hidden-480 ">@item.Note.ToString().Split('|').FirstOrDefault()</td>
+
+
+
+                    @{
+                String status = item.UserInvoices.LastOrDefault().Status.StatusName.ToString();
+                status = StringConvert.ConvertShortName(status);
+                    }
+                    <td class="hidden-480">
+
+                        @if (isReject.Equals("true"))
+                        {
+                            <span style="font-weight:bold;color: red">
+                                @*@item.UserInvoices.LastOrDefault().Status.StatusName (@item.UserInvoices.LastOrDefault().Status.Note)*@
+                                Rejected
+                            </span>
+                        }
+                        else if (item.isDelete == true)
+                        {
+                            <span style="font-weight:bold;color: red">
+                                Canceled Invoice
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="@status">
+                                @item.UserInvoices.LastOrDefault().Status.StatusName (@item.UserInvoices.LastOrDefault().Status.Note)
+                            </span>
+                        }
+
+                    </td>
+                    <td class="hidden-480 ">@item.IsCDS</td>
+                    <td class="hidden-480 ">@item.UserInvoices.FirstOrDefault().CreatedDate.ToShortDateString()</td>
+
+
+                    @*<td class="hidden-480 "><span class="@isReject">@item.UserInvoices.LastOrDefault().isReject</span></td>*@
+                    @*<td class="hidden-480 ">@item.UserInvoices.LastOrDefault().isReject</td>*@
+
+
+
+
+
+
+
+                    @*<td class=" ">
+                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+                                <a href="/Admin/Booking/Edit?productId=@item.Id" class="btn btn-xs btn-info">
+                                    <i class="icon-edit bigger-160"></i>
+                                </a>
+                                <a href="/Admin/Product/Delete?productId=@item.Id" class="btn btn-xs btn-danger">
+                                    <i class="icon-trash bigger-160"></i>
+                                </a>
+                            </div>
+                        </td>*@
+                </tr>
+            }
+        }
+    </tbody>
+</table>

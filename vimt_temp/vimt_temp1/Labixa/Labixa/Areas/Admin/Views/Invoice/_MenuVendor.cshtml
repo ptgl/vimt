@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.Vendor>
+
+
+    <select class="filter_1" style="width: 210px;height: 30px;">
+        <option value=" ">
+    All</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.VendorName">@item.VendorName</option>
+    }
+
+
+</select>
+

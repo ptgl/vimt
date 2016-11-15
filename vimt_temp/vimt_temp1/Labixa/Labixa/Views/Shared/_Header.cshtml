@@ -1,0 +1,103 @@
+﻿<header class="transition">
+    <link href="~/Content/labixa/hover.css" rel="stylesheet" />
+
+    <div class="header_inner clearfix" >
+        <div style="padding: 0px;" class="newlogo">
+            <a href="/">
+                <img style="" src="/Images/logo_labixa.png" alt="Logo">
+            </a>
+        </div>
+
+
+        <div class="header_inner_right">
+            <nav class="main_menu drop_down">
+                <ul id="menu-main-menu" class="">
+
+                    <li id="nav-menu-item-3485" class="  ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0) !important; " href="/" class="button wobble-horizontal">@Resources.Home</a>
+
+                    </li>
+                    <li id="nav-menu-item-3494" class="  ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/be-labixa-ngoi-nha-giua-bien" class="button wobble-horizontal"> @Resources.LabixaBoat</a>
+                    </li>
+                    @*<li id="nav-menu-item-3494" class="  ">
+                            <a style="line-height: 90px;" href="#" class="down right current"> SCUBA DIVING</a>
+                        </li>
+                        <li id="nav-menu-item-2082" class="  ">
+                            <a style="line-height: 90px;" href="#" class="down right">SNOKERLING</a>
+
+                        </li>*@
+                    <li id="nav-menu-item-3412" class="   ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/dich-vu-labixa" class="button wobble-horizontal">@Resources.Service</a>
+
+                    </li>
+                    <li id="nav-menu-item-3412" class="   ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/tour-labixa" class="button wobble-horizontal">@Resources.Tour</a>
+
+                    </li>
+                    <li id="nav-menu-item-2684" class="   ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/tin-tuc-su-kien" class="button wobble-horizontal">@Resources.News</a>
+
+                    </li>
+                    <li id="nav-menu-item-2684" class="   ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/gioi-thieu" class="button wobble-horizontal">@Resources.Introduction</a>
+
+                    </li>
+                    <li id="nav-menu-item-3568" class="  ">
+                        <a style="line-height: 90px; background-color: rgba(255, 255, 255, 0)" href="/lien-he" class="button wobble-horizontal">@Resources.Contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="selectnav_button"><span>&nbsp;</span></div>
+            @*<div style="line-height: 90px;" class="header_right_widget">
+                    <div class="textwidget">       <ul class="social_menu light"><li class="twitter"><a href="#m" target="_blank"><span class="inner">twitter</span></a></li><li class="facebook"><a href="http://www.facebook.com" target="_blank"><span class="inner">facebook</span></a></li>           </ul></div>
+                </div>*@
+        </div>
+        <nav class="selectnav">
+            <div class="select">
+                <ul></ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<script>
+    jQuery(window).scroll(function () {
+        if (jQuery(window).scrollTop() >= 44) {
+            jQuery(".newlogo").addClass("logo-small");
+        } else {
+            jQuery(".newlogo").removeClass("logo-small");
+        }
+    });
+
+</script>
+<style>
+    menu_a:hover {
+        color: crimson;
+    }
+
+    menu_a:after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: -5;
+        left: 50%;
+        bottom: 0;
+        -webkit-transform: translateX(-50%) skew(-89deg) scaleX(1.5);
+        -ms-transform: translateX(-50%) skew(-89deg) scaleX(1.5);
+        transform: translateX(-50%) skew(-89deg) scaleX(1.5);
+        opacity: 0;
+        background: #00ffff;
+        -webkit-transition: all 0.4s cubic-bezier(0.42, 0.08, 0, 1.8);
+        transition: all 0.4s cubic-bezier(0.42, 0.08, 0, 1.8);
+    }
+
+    menu_a:hover:after {
+        width: 140%;
+        -webkit-transform: translateX(-50%) skew(-20deg) scaleX(1);
+        -ms-transform: translateX(-50%) skew(-20deg) scaleX(1);
+        transform: translateX(-50%) skew(-20deg) scaleX(1);
+        opacity: 1;
+    }
+</style>

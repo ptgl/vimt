@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Blog>
+@using PagedList.Mvc;
+<link href="~/Content/vja/css/styles.css" rel="stylesheet" />
+<div class="container">
+    <!--SERVICES -->
+    <div class="title has_fixed_background services ">
+
+    </div>
+    <div class="container_inner clearfix">
+        <div class="column_inner">
+
+            @*<div class='filter_holder'>
+                    <ul>
+                        <li class='label'>
+                            <span data-label='Labixa - top dịch vụ'>Labixa -dịch vụ</span>
+                            <div class='arrow'></div>
+                        </li>
+                        <li class='filter' data-filter='all'><span>Xem hết</span></li>
+                        @*<li class='filter' data-filter='travel'><span>Du lịch</span></li>
+                        <li class='filter' data-filter='diving'><span>Lặn biển</span></li>
+                        <li class='filter' data-filter='game'><span>Trò chơi biển</span></li>
+                        <li class='filter' data-filter='explore'><span>Khám phá</span></li>
+                    </ul>
+                </div>*@
+            <div class='projects_holder_outer'>
+                <div class='projects_holder projects_type2 v3'>
+                    
+                    @foreach (var item in Model)
+                    {
+                        <article class='mix video '>
+                            <div class='image'>
+                                <div class='hover-type-text'>
+                                    <div class='hover-inner'>
+                                        <a href='dich-vu-labixa/@item.Slug' class='hover-inner-link'>
+                                            <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                            <br /><p>@item.Description</p>
+                                        </a>
+                                        <a class='preview' title='Melbourne Identity' href='/@item.Slug' data-rel=' '></a>
+                                    </div>
+                                </div><a href='#'><img width="424" height="318" src="@item.BlogImage" class=" " alt="02" /></a>
+                            </div><h4>@item.Title</h4>
+                        </article>
+                    }
+                    
+
+                    @*<article class='mix diving '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='#'><img width="424" height="318" src="/Images/snorkeling.jpg" class=" " alt="02" /></a>
+                        </div><h4>BƠI SNORKELING</h4>
+                    </article>
+                    <article class='mix diving '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='#'><img width="424" height="318" src="/Images/scuba.jpg" class=" " alt="04" /></a>
+                        </div><h4>LẶN BIỂN - LẶN SCUBA</h4>
+                    </article>
+                    <article class='mix game  '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='#'><img width="424" height="318" src="/Images/motonuoc.jpg" class=" " alt="01" /></a>
+                        </div><h4>MOTO JETSKI</h4>
+                    </article>
+                    <article class='mix game '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='#'><img width="424" height="318" src="/Images/duluong.jpg" class=" " alt="14" /></a>
+                        </div><h4>DÙ LƯỢN</h4>
+                    </article>
+                    <article class='mix explore '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='http://demo.qodeinteractive.com/central/portfolio_page/metropolis/'><img width="424" height="318" src="/Images/biendao.jpg" class=" " alt="06" /></a>
+                        </div><h4>DU LỊCH BIỂN ĐẢO</h4>
+                    </article>
+                    <article class='mix explore '>
+                        <div class='image'>
+                            <div class='hover-type-text'>
+                                <div class='hover-inner'>
+                                    <a href='#' class='hover-inner-link'>
+                                        <h4 class='portfolio_title'>Thông tin dịch vụ</h4>
+                                        <p> Mô tả </p>
+                                    </a>
+                                    <a class='preview' title='Melbourne Identity' href='http://demo.qodeinteractive.com/central/wp-content/uploads/2013/04/0415.jpg' data-rel='prettyPhoto[pretty_photo_gallery]'></a>
+                                </div>
+                            </div><a href='#'><img width="424" height="318" src="/Images/khampha.jpg" class=" " alt="05" /></a>
+                        </div><h4>KHÁM PHÁ</h4>
+                    </article>*@
+      
+                    <div class='filler'></div>
+                    <div class='filler'></div>
+                </div>
+                @*<div class="portfolio_paging">
+                    <span rel="2" class="load_more">
+                        <a href="#">Các dịch vụ khác tại Labixa</a>
+                    </span>
+                </div>*@
+            </div>
+
+            <div style="margin-top:30px;margin-bottom:30px;background-color: transparent;" class="separator"></div>
+            <div>
+
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("HomePageNews", new { page, slug = ViewBag.slug, currentFilter = ViewBag.CurrentFilter }))
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--END SERVICES -->
+</div>

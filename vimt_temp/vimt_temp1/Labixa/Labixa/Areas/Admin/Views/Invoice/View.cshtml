@@ -1,0 +1,215 @@
+﻿@using Outsourcing.Core
+@model Outsourcing.Data.Models.Invoice
+@{
+    ViewBag.Title = "Invoice";
+}
+@using Outsourcing.Core.Extensions;
+@using Outsourcing.Core.Common;
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+    <link href="~/Content/StatusColor.css" rel="stylesheet" />
+
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/Invoice">Manage Invoices</a>
+            </li>
+            <li class="active">View Invoice</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @if (Model != null)
+            {
+                <div class="alert alert-block alert-info">
+                    View content : @Model.requestID
+                </div>
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                Content
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+
+                            <div class="form-group ">
+                                @*@Html.MyLabelFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName)*@
+                                <div class="col-sm-3">
+                                    Vendor Name
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName)
+                                </div>
+                            </div><br />
+                            <div class="form-group ">
+                                <div class="col-sm-3">
+                                    Address
+                                </div>
+                                <div class="col-sm-9">
+                                    @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.Address)
+                                </div>
+                            </div><br />
+                            <div class="form-group ">
+                                <div class="col-sm-3">
+                                    Tax Code
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.TaxCode, "String")
+                                </div>
+                            </div><br />
+                            <div class="form-group ">
+                                <div class="col-sm-3">
+                                    WWID
+                                </div>
+                                <div class="col-sm-3">
+                                    @*@Html.DisplayFor(model => model.UserInvoices.FirstOrDefault().UserTable.WWID, "String")*@
+                                  @{
+                var wwid = Model.Note.ToString().Split('|').FirstOrDefault();
+                                  }
+                                    @wwid
+                                </div>
+                            </div><br />
+                            <div class="form-group ">
+                                <div class="col-sm-3">
+                                    Status
+                                </div>
+                                @{
+                                    String status = Model.UserInvoices.LastOrDefault().Status.StatusName;
+                                    status = StringConvert.ConvertShortName(status);
+                                }
+                                <div class="col-sm-3">
+                                    <span class="@status">
+                                        @Html.DisplayFor(model => model.UserInvoices.LastOrDefault().Status.StatusName)
+                                    </span>
+                                </div>
+                            </div><br />
+                            <div class="form-group ">
+                                <div class="col-sm-3">
+                                    Total Payment
+                                </div>
+                                <div class="col-sm-3">
+                                    @Model.totalPayment.ToString("##,###,##0")
+                                </div>
+                            </div><br />
+
+
+                            @if (Model.UserInvoices.LastOrDefault().isReject == true)
+                            { 
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        <strong> Reject Reason: </strong>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span style="background:red; color:white;">
+                                            @Html.DisplayFor(model => model.UserInvoices.LastOrDefault().rejectReason)
+                                        </span>
+                                    </div>
+                                </div><br />
+                            }
+
+                            @if (!Model.URL.ToString().Equals(""))
+                            {
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Invoice Doc:
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @*@Html.ActionLink(@Model.fileName, "Download", new { fileName = @Model.fileName, key = @Model.Id })*@
+                                        <a href="@Model.URL.ToString()">Document</a>
+
+                                    </div>
+                                </div><br />
+                            }
+                           
+
+
+
+                            <table id="productTable" class="table table-bordered table-striped table-fixed-header">
+                                <thead>
+                                    <tr role="row">
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                    @if (Model != null)
+                                    {
+                                        int count = 0;
+                                        foreach (var item in Model.InvoiceItems)
+                                        {
+                                            count++;
+                                            <tr class="odd">
+                                                <td class=" sorting_1">@count</td>
+                                                <td class="hidden-480 ">@item.ItemVendor.ItemName</td>
+                                                <td class="hidden-480 ">@item.Quantity</td>
+                                                <td class="hidden-480 ">@item.ItemVendor.Price.ToString("##,###,##0")</td>
+
+                                                <td class=" ">@slitString.sum(item.Quantity, item.ItemVendor.Price).ToString("##,###,##0")</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        @*<button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                @Resources.Admin_Save
+                            </button>*@
+
+                        @*<input class="btn btn-success" type="submit" name="save-continue" value="@Resources.Admin_SaveContinue">*@
+
+
+
+                        &nbsp; &nbsp; &nbsp;
+                        @*<button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                @Resources.Admin_Reset
+                            </button>*@
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="/Invoice" class="btn btn-warning">@Resources.Admin_Back</a>
+                    </div>
+                </div>
+
+
+                @*
+                    partial for group button
+                *@
+            }
+            else
+            {
+                <h1>Không tìm thấy sản phẩm!</h1>
+            }
+        </div>
+    </div>
+</div>

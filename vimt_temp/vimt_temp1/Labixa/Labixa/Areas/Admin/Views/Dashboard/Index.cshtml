@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "VIMT Homepage";
+
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            @if (Session["role"] == null)
+                { 
+                <li class="active">Login</li>
+                }
+        </ul>
+    </div>
+}
+@model Labixa.Areas.Admin.ViewModel.LoginFormModel
+<div class="page-header" onload="GetComputerName()">
+    <h1 style="text-align: center; margin-bottom: 20px;">
+        Welcome @*@Model.name*@ @Session["user"]
+    </h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-box">
+
+                <a href="javascript:void(0)" onclick="GetComputerName()">hello @Session["user"].ToString()</a>
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <div id="reportStaff" style="min-width: 310px; height: 400px; margin: 0 auto">
+                            @if (Session["role"] == null)
+                            {
+                                <center>
+                                    <form action="/Dashboard/Login" method="post">
+                                        @Html.HiddenFor(model => model.name)
+                                        @Html.HiddenFor(model => model.WWID)
+                                        @Html.HiddenFor(model => model.mail)
+                                        @Html.HiddenFor(model => model.ManagerWWID)
+                                        @Html.DropDownListFor(model => model.RoleGroupId, Model.ListRoleGroup)
+                                        <br /><br /><input type="submit" value="Login" class="btn btn-danger" />
+                                    </form>
+                                </center>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1 id="123"></h1>
+</div>
+<script>
+    function GetComputerName() {
+        try {
+            var network = new ActiveXObject('WScript.Network');
+            // Show a pop up if it works
+            alert(network.computerName);
+            $("#123").val(network.computerName);
+        }
+        catch (e) { }
+    }
+</script>

@@ -1,0 +1,5 @@
+﻿
+@*<script>
+    window.location.href = '/Admin/Dashboard/Index';
+</script>*@
+ahc

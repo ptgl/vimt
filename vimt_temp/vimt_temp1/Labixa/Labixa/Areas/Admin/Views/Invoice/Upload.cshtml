@@ -1,0 +1,155 @@
+﻿@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@{
+    var role = Session["role"].ToString().ToLower();
+}
+@model Labixa.Areas.Admin.ViewModel.InvoiceViewModel
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/Invoice">Add New Invoice</a>
+                @*<a href="/Admin/Product">Manage Invoice</a>*@
+            </li>
+            <li class="active">Upload</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<div class="alert alert-block alert-info">
+                    Add new invoice
+                </div>*@
+            @*@using (Html.BeginForm("CreateVendor", "Invoice", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {*@
+@using (Html.BeginForm("Upload", "Invoice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                Upload File
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+
+                            @if (Model.URL.ToString().Equals(""))
+                            {
+                                   @Html.TextBoxFor(model => model.file, new { type = "file" })
+                            }
+
+                         
+                            @Html.ValidationMessageFor(model => model.file, "")
+                            @Html.HiddenFor(model => model.InvoiceId)
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.Description)
+                            @Html.HiddenFor(model=>model.requestID)
+                            
+                         
+
+                            @*<input type="submit" id="btnUpload" name="btnUpload" value="Upload" />*@
+                            <br /><br />
+                            @if (!Model.URL.ToString().Equals(""))
+                            {
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Invoice Doc:
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.ActionLink(@Model.fileName, "Download", new { fileName = @Model.fileName, key = @Model.Id })
+                                        @*@Html.ActionLink("Delete", "DeleteFile", new { fileName = @Model.fileName, key = @Model.Id }, new { onclick = "return confirm('Are you sure that you want to delete?');" })*@
+
+
+                                    </div>
+                                </div><br />
+                            }
+
+
+                            @ViewBag.Message
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        @*
+            partial for group button
+                        *@
+                        @*@Html.Partial("_PartialButtonGroup", "/Invoice")*@
+                       
+                                 <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+
+
+                        &nbsp;&nbsp; &nbsp;
+                            @if (Model.URL.ToString().Equals(""))
+                            {
+                                <button type="submit" id="open-frmUpload" class="btn btn-danger">
+                                    Upload
+                                </button>
+                            }
+
+
+                            &nbsp; &nbsp; &nbsp;
+                             @if (!Model.URL.ToString().Equals(""))
+                             {
+                                <a href="/Invoice/DeleteFile?fileName=@Model.fileName&key=@Model.Id" class="btn btn-info" onclick="return confirm('Are you sure that you want to delete?');">Delete File</a>
+                                   }
+                                   
+                            &nbsp; &nbsp; &nbsp;
+                            <a href="/Invoice" class="btn btn-info">Done</a>
+                               
+
+                    </div></div>
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                        }
+
+                    </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+
+
+</script>

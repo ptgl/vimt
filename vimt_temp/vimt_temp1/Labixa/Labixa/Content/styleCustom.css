@@ -1,0 +1,192 @@
+﻿body {
+}
+
+.general{
+    position:relative; 
+    width:595px;
+     height:842px;
+    font-size:0.7em;
+}
+
+.empty{
+    height:105px;
+}
+
+.DateTime{
+    position:absolute; 
+    right:5px;
+     margin-top:14px;
+}
+
+.company{
+    position:absolute;
+     margin-top:50px;
+     margin-left:80px;
+}
+
+.tax-code{
+    position:absolute;
+     margin-top:80px;
+     margin-left:75px;
+
+}
+
+.address{
+    position:absolute;
+     margin-top:103px;
+      margin-left:50px;
+       width:140px;
+}
+
+.payment-method{
+    position:absolute;
+     margin-top:110px;
+      margin-left:400px;
+}
+
+
+.list-items{
+    position:absolute;
+}
+
+.list-items table{
+    position: relative;
+     margin-top:180px;
+}
+
+.stt{
+    width:50px;
+}
+
+.name-product{
+    width:250px;
+}
+
+.unit{
+    width:230px;
+}
+
+.quantity{
+width:150px;
+}
+
+.unit-price{
+    width:100px;
+}
+
+
+.VAT-rate{
+    position:absolute; 
+    margin-top:480px; 
+    right:168px
+
+}
+
+.amount-word{
+    position:absolute; 
+    margin-top:540px
+}
+
+
+.total-final{
+    position:absolute; 
+    margin-top:463px; 
+    right:0px; 
+    line-height:16px
+}
+
+
+.total-final p{
+     text-align:center
+}
+
+
+.div-img{
+      position: relative;
+  width: 100%;
+  height: 111px;
+}
+
+.img12{
+    width: 100%;
+  height: 80%;
+  position: absolute;
+  top: 5px;
+}
+
+.img11{
+    width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -2px;
+}
+
+.img10{
+    width: 100%;
+  height: 110%;
+  position: absolute;
+  top: -2px;
+}
+
+.img9{
+    width: 100%;
+  height: 120%;
+  position: absolute;
+  top: -2px;
+}
+
+.img8{
+    width: 100%;
+  height: 130%;
+  position: absolute;
+  top: -2px;
+}
+
+.img7{
+    width: 100%;
+  height: 140%;
+  position: absolute;
+  top: -2px;
+}
+
+.img6{
+    width: 100%;
+  height: 150%;
+  position: absolute;
+  top: -2px;
+}
+
+.img5{
+    width: 100%;
+  height: 160%;
+  position: absolute;
+  top: -2px;
+}
+
+.img4{
+    width: 100%;
+  height: 170%;
+  position: absolute;
+  top: -2px;
+}
+
+.img3{
+    width: 100%;
+  height: 180%;
+  position: absolute;
+  top: -2px;
+}
+
+.img2{
+    width: 100%;
+  height: 190%;
+  position: absolute;
+  top: -2px;
+}
+
+.img1{
+    width: 100%;
+  height: 200%;
+  position: absolute;
+  top: -2px;
+}

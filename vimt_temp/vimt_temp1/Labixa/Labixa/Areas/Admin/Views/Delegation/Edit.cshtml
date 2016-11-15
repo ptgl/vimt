@@ -1,0 +1,412 @@
+﻿@using Outsourcing.Core
+@model Labixa.Areas.Admin.ViewModel.InvoiceViewModel
+@{
+    ViewBag.Title = "Invoice";
+    var role = Session["role"].ToString().ToLower();
+}
+@using Outsourcing.Core.Extensions;
+@using Outsourcing.Core.Common;
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+
+    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link href="~/Content/StatusColor.css" rel="stylesheet" />
+    <style>
+        .ui-widget-header, .ui-state-default, ui-button {
+            background: #b9cd6d;
+            border: 1px solid #b9cd6d;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .ui-widget-content {
+            background: #DADADA;
+        }
+    </style>
+
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+
+                <i class="icon-edit"></i>
+                <a href="/Delegation">Manage Delegations</a>
+            </li>
+            <li class="active">Edit Manager</li>
+        </ul>
+
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @if (Model != null)
+            {
+                <form action="/Delegation/Edit" class="form-horizontal" id="myform" method="post" novalidate="novalidate">
+                    <div class="alert alert-block alert-info">
+                        View content : @Model.requestID
+                    </div>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab1">
+                                    <i class="green icon icon-home bigger-120"></i>
+                                    Content
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane fade active in">
+                                @*<div class="form-group ">
+                                        @Html.MyLabelFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName)
+                                        <div class="col-sm-3">
+                                            Approve
+                                        </div>
+                                        <div class="col-sm-3">
+
+
+                                        </div>
+                                    </div><br />*@
+
+
+
+                                @* ===================================================== *@
+
+
+
+
+                                @*<div class="form-group">
+                                        <div id="reject" class="col-sm-3">
+                                            <button type="button" class="btn-danger">Reject</button>
+                                        </div>
+                                        <div id="reason" style="display:none" class="col-sm-3">
+                                            @Html.TextAreaFor(model => model.rejectReason, new { cols = "50", rows = "5" })
+                                        </div>
+                                    </div>
+
+
+                                            <br>*@
+
+
+
+
+                                @* ===================================================== *@
+
+
+                                @*<!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                        Launch demo modal
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+
+
+
+                                @* ===================================================== *@
+
+                                @*@Html.EditorFor(model => model.approve)*@
+                                @Html.HiddenFor(model => model.recentStatus)
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.HiddenFor(model => model.UserTableId)
+                                @Html.HiddenFor(model => model.requestID)
+                                @*@Html.HiddenFor(model => model.PaymentAmount)*@
+                                @Html.HiddenFor(model=>model.totalPayment)
+
+
+
+
+                                <div class="form-group ">
+                                    @*@Html.MyLabelFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName)*@
+                                    <div class="col-sm-3">
+                                        Vendor Name
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName)
+                                    </div>
+                                </div><br />
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Address
+                                    </div>
+                                    <div class="col-sm-9">
+                                        @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.Address)
+                                    </div>
+                                </div><br />
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Tax Code
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.DisplayFor(model => model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.TaxCode, "String")
+                                    </div>
+                                </div><br />
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        WWID
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.DisplayFor(model => model.UserInvoices.FirstOrDefault().UserTable.WWID, "String")
+                                    </div>
+                                </div><br />
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Status
+                                    </div>
+                                    @{
+                String status = Model.recentStatus.Trim();
+                status = StringConvert.ConvertShortName(status);
+                                    }
+
+                                    <div class="col-sm-3">
+                                        @*@Html.DisplayFor(model => model.UserInvoices.LastOrDefault().Status.StatusName)*@
+                                        <span class="@status">@Model.recentStatus.Trim()</span>
+                                        @*@Html.DisplayFor(model => model.recentStatus)*@
+                                    </div>
+                                </div><br />
+
+
+
+
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Total Payment
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @*@Html.DisplayFor(model => model.totalPayment, "Double")*@
+                                        @if (Model != null)
+                                        {
+                                            double sumM = 0;
+                                            foreach (var item in Model.InvoiceItems)
+                                            {
+                                                sumM += slitString.sum(item.Quantity, item.ItemVendor.Price);
+                                            }
+                                            @sumM.ToString("##,###,##0")
+                                        }
+
+                                    </div>
+                                </div><br />
+
+
+
+
+                               
+                                <table id="productTable" class="table table-bordered table-striped table-fixed-header">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>No</th>
+                                            <th>Name of Commodity, Service</th>
+                                            <th>Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                        @if (Model != null)
+                                        {
+                                            int count = 0;
+                                            //double sumM = 0;
+                                            foreach (var item in Model.InvoiceItems)
+                                            {
+                                                count++;
+                                                //sumM += slitString.sum(item.Quantity, item.ItemVendor.Price);
+                                                <tr class="odd">
+                                                    <td class=" sorting_1">@count</td>
+                                                    <td class="hidden-480 ">@item.ItemVendor.ItemName</td>
+                                                    <td class="hidden-480 ">@item.Quantity</td>
+                                                    <td class="hidden-480 ">@item.ItemVendor.Price.ToString("##,###,##0")</td>
+
+                                                    <td class="">@slitString.sum(item.Quantity, item.ItemVendor.Price).ToString("##,###,##0")</td>
+
+                                                </tr>
+                                            }
+                                            @*<tr>
+                                                    <td class="" style="border-bottom:solid 0px"></td>
+                                                    <td class=""></td>
+                                                    <td class=""></td>
+                                                    <td class=""><b>Total payable</b></td>
+                                                    <td class="hidden-480 ">@sumM.ToString("##,###,##0")</td>
+                                                </tr>*@
+                                        }
+                                    </tbody>
+                                </table>
+
+
+
+                                <div class="form-group ">
+                                    <div class="col-sm-3">
+                                        Manager WWID:
+                                    </div>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.wwidManager) 
+
+                                    </div>
+                                </div><br />
+
+
+
+
+
+
+
+
+
+                                @*<p id="text"></p>
+                                    <p id="val"></p>
+                                    <button type="button" id="nut"></button>*@
+
+                              
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @{var rescentStatus = Model.recentStatus.ToString().ToLower();}
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+
+                           
+
+                                    <button class="btn btn-info" id="aaa" type="submit">
+                                        <i class="icon-ok bigger-110"></i>
+                                        @Resources.Admin_Confirm
+                                    </button>
+
+
+
+
+
+
+                                
+
+                               
+                            
+
+                            @*<input class="btn btn-success" type="submit" name="save-continue" value="@Resources.Admin_SaveContinue">*@
+
+
+
+                            &nbsp; &nbsp; &nbsp;
+                            @*<button class="btn" type="reset">
+                                    <i class="icon-undo bigger-110"></i>
+                                    @Resources.Admin_Reset
+                                </button>*@
+
+                          
+
+                            &nbsp; &nbsp; &nbsp;
+                            <a href="/Delegation/DelegateRequestor" class="btn btn-warning">@Resources.Admin_Back</a>
+                           
+                          
+
+
+
+                           
+
+                        </div>
+                    </div>
+
+
+                    @*
+                        partial for group button
+                    *@
+                </form>
+            }
+            else
+            {
+                <h1>Không tìm thấy sản phẩm!</h1>
+            }
+        </div>
+    </div>
+</div>
+
+@*<button type="button" id="open-dialog" class="btn-default">Reject</button>*@
+
+
+
+<script>
+
+    //$(document).ready(function () {
+    $("#reject").click(function () {
+        // $("#reason").show();
+        $("#reason").toggle();
+    });
+    //});
+
+    $(function () {
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 445,
+            height: 230,
+            //buttons: { OK: function () { $(this).dialog("close");}},
+        });
+
+
+        $("#open-dialog").click(function () {
+
+            $("#dialog").dialog("open");
+        });
+
+    });
+
+
+    //$("#save").click(function () {
+    //    $("#myform").attr("action", "/Invoice/Save").submit();
+    //});
+
+    //function validateDate() {
+    //    var mydate = document.getElementById('mydate'),
+    //      mydateError = document.getElementById('mydate_error');
+
+    //    var value = new Date(mydate.value),
+    //    min = new Date(mydate.min),
+    //    max = new Date(mydate.max);
+    //    if (value < min || value > max) {
+    //        mydateError.innerHTML = 'Date has to be between ' + min.toDateString() + ' and ' + max.toDateString();
+    //        mydateError.style.display = 'inherit';
+    //    } else {
+    //        mydateError.style.display = 'none';
+    //    }
+    //}
+
+
+
+
+</script>
+

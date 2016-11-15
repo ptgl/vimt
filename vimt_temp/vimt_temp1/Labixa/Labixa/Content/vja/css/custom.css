@@ -1,0 +1,174 @@
+/*Test*/
+
+#content-left-step2 {
+    left: -776px;
+}
+/*End Test*/
+
+/*form select - place*/
+#select-place-2 .nicescroll-rails,
+#select-day-2 .nicescroll-rails {
+    left: 260px !important;
+}
+#select-food-2,
+#select-day-2,
+#select-place-2 {
+    width: 270px;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 30px;
+    background: #323230;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.border-content {
+    height: 100%;
+}
+#select-food-2 .title,
+#select-day-2 .title,
+#select-place-2 .title {
+    font-size: 26px;
+    color: #ffffff;
+    padding-bottom: 20px;
+}
+	#select-food-2{
+		/*right: -270px;*/
+		padding-top: 0;
+		z-index: 0;
+	}
+#select-place-2 .ip {
+    height: 38px;
+    background: #424242;
+    border: 1px solid #646464;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 20px;
+}
+
+    #select-place-2 .ip input {
+        font-size: 16px;
+        color: #fff;
+        width: 100%;
+        background: none;
+        border: none;
+        outline: none;
+        font-family: 'arial';
+        margin-top: 8px;
+    }
+
+.list-place-2 {
+    box-sizing: border-box;
+    margin-top: 26px;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 105px;
+}
+
+    .list-place-2 li {
+        margin-bottom: 31px;
+        padding-left: 21px;
+    }
+
+        .list-place-2 li a {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+            .list-place-2 li a:hover {
+                color: #d2000a;
+            }
+
+.step2-layout2, .step2-layout1 {
+    width: 100%;
+}
+
+.choose-seat.vip {
+    margin-top: 15px;
+}
+
+.seat-left {
+    width: 245px;
+}
+
+.seat-left a:nth-child(4), .seat-left span:nth-child(4) ,.seat-right a:nth-child(4) {
+        margin-left: 55px;
+}
+.seat-left a.seatvip, .seat-right a.seatvip
+{
+    background: url(../images/bg/seat-vip.png) no-repeat 0 0;
+}
+.seat-left a.seatexit, .seat-right a.seatexit
+{
+    background: url(../images/bg/seat-exit.png) no-repeat left 0px;
+}
+.seat-left a.seatvip.selected, .seat-right a.seatvip.selected,.seat-left a.seatvip:hover, .seat-right a.seatvip:hover,
+.seat-left a.seatexit:hover, .seat-right a.seatexit:hover {
+    background: url(../images/bg/seat-hover.png) no-repeat 0 0;
+}
+
+.component-marquee .city.HAN{
+    margin-left: 8.7%;
+    top: 14.6%;
+}
+.component-marquee .city.HPH{
+    margin-left: 14.2%;
+    top: 15.6%;
+}
+.component-marquee .city.VII{
+    margin-left: 8%;
+    top: 29.6%;
+}
+.component-marquee .city.SGN{
+	margin-left: 14.25%;
+    top: 80.17%;
+}
+.component-marquee .city.CXR{
+	margin-left: 29.8%;
+    top: 72.7%;
+}
+.component-marquee .city.DLI{
+	margin-left: 24.5%;
+    top: 74%;
+}
+.component-marquee .city.BMV{
+	margin-left: 23.5%;
+    top: 69%;
+}
+.component-marquee .city.DAD{
+	margin-left: 23.4%;
+    top: 47%;
+}
+.component-marquee .city.PQC{
+	margin-left: -3.9%;
+    top: 84.1%;
+}
+.component-marquee .city.VCA{
+	margin-left: 7.5%;
+    top: 85.5%;
+}
+.component-marquee .city.UIH{
+	margin-left: 28.4%;
+    top: 60.7%;
+}
+.component-marquee .city.HUI{
+	margin-left: 20.2%;
+    top: 44.5%;	
+}
+#trip .icon-trip {
+    background: url(../images/icon/khuhoi.png) center center no-repeat;
+}
+
+.valid {
+    background: #1A501A !important; 
+}   
+.add-service p{
+    width:386px;
+}
+.select-top .selectize-dropdown {
+
+bottom: 35px;
+}

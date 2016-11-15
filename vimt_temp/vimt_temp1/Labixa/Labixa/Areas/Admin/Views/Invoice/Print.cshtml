@@ -1,0 +1,130 @@
+﻿
+@{
+    Layout = null;
+}
+@model Labixa.Areas.Admin.ViewModel.InvoiceViewModel
+@using Outsourcing.Core.Common 
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print</title>
+ 
+    <link href="~/Content/styleCustom.css" rel="stylesheet" />
+
+
+   
+
+</head> 
+<body onload="window.print()" onafterprint="window.history.back(-1)">
+
+    @if (Model != null)
+    {
+        int count = 0;
+        double sum = 0.0;
+
+        <div class="general">
+            <div class="empty"></div>
+            <div class="DateTime"><p>@*30-06-2015*@  @DateTime.Now.ToString("dd-MM-yyyy")</p></div>
+            <div class="company">
+                <p>
+                    @Model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName
+                </p>
+            </div>
+            <div class="tax-code">
+                <p>
+                    @Model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.TaxCode
+                </p>
+            </div>
+            <div class="address">
+                <p>
+                    @Model.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.Address
+                </p>
+            </div>
+            <div class="payment-method"><p>chuyển khoản</p></div>
+            <div class="list-items">
+                <table>
+
+
+
+                    @foreach (var item in Model.InvoiceItems)
+                    {
+                        count++;
+
+                        <tr>
+                            <td class="stt">@count</td>
+                            <td class="name-product">  @item.ItemVendor.ItemName</td>
+                            <td class="unit">  @item.ItemVendor.Unit    </td>
+                            <td class="quantity">  @item.Quantity </td>
+                            <td class="unit-price">  @item.ItemVendor.Price.ToString("##,###,##0")  </td>
+                            <td>
+                                @item.totalPrice.ToString("##,###,##0")
+                            </td>
+                        </tr>
+                        sum += double.Parse(item.totalPrice.ToString());
+                    }
+
+
+                </table>
+                <div class="div-img"><img src="~/Images/line_invoice.png" class="img2" /></div>
+
+            </div>
+
+            <div class="VAT-rate">
+                <p>0</p>
+            </div>
+
+            <div class="total-final">
+                <p>
+                    @sum.ToString("##,###,##0")<br />
+                    @StringConvert.product(0.0, sum)
+                    <br />
+                    @StringConvert.total_final(0.0, sum)
+                </p>
+            </div>
+
+
+            <div class="amount-word">
+                <p>
+                
+                    @MoneyConvert.So_chu(double.Parse(StringConvert.total_final(0.0, sum)))
+                </p>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @* ========================================================= *@
+
+
+
+
+
+    }
+    else
+    { <h1>Not Found Invoice</h1> }
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Blog>
+@using Outsourcing.Core.Common;
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="container">
+    <!--TOUR -->
+
+    <div class="title has_fixed_background services ">
+
+    </div>
+    <div class="full_width">
+        <div class="blog_holder clearfix homepagenews">
+            <div class="column_inner">
+                <div class="blog_holder_inner">
+
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <article class=" post type-post status-publish format-standard hentry category-life mix mix_all ">
+                                <div class="image">
+                                    <a href="/@item.BlogCategory.Slug/@item.Slug" title="@item.Title">
+                                        <img src="@item.BlogImage" class="" alt="" />
+                                    </a>
+                                </div>
+                                <div class="blog_text_holder">
+                                    <h4><a href="/@item.BlogCategory.Slug/@item.Slug" title="@item.Title"> @item.Title</a></h4>
+                                    <div class="text">
+                                        <div class="text_inner">
+                                            @Html.Raw(item.Description)
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <a href="/@item.BlogCategory.Slug/@item.Slug">XEM TIẾP</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                        }
+                    }
+
+                    @*@{                {
+                        int count = 0;
+                        bool flag = false;
+                        foreach (var item in Model)
+                        {
+                            <input hidden="hidden" value="@item.Slug" />
+
+                            count++;
+                            if (count == 4 && flag==false)
+                            {
+                                flag = true;
+                                count = 0;
+                                <div class="column1 " style="clear: left">
+                                    <div class="column_inner">
+                                        <img class="" alt="i" src="@item.BlogImage" width="320" height="180"><p></p>
+                                        <a href="/@item.BlogCategory.Slug/@item.Slug">
+                                            <h4 style="margin-top: 18px;">@slitString.TruncateAtWord(item.Title, 30)</h4>
+                                        </a>                           <p>
+                                            @slitString.TruncateAtWord(item.Description, 130)<br />
+                                            <a class="more" href="/@item.BlogCategory.Slug/@item.Slug">Xem thêm</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                if (count == 3 && count % 3 == 0 && flag==true)
+                                {
+                                    count = 0;
+                                    <div class="column1 " style="clear: left">
+                                        <div class="column_inner">
+                                            <img class="" alt="i" src="@item.BlogImage" width="320" height="180"><p></p>
+                                            <a href="/@item.BlogCategory.Slug/@item.Slug">
+                                                <h4 style="margin-top: 18px;">@slitString.TruncateAtWord(item.Title, 30)</h4>
+                                            </a>                           <p>
+                                                @slitString.TruncateAtWord(item.Description, 130)<br />
+                                                <a class="more" href="/@item.BlogCategory.Slug/@item.Slug">Xem thêm</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="column1 ">
+                                        <div class="column_inner">
+                                            <img class="" alt="i" src="@item.BlogImage" width="320" height="180"><p></p>
+                                            <a href="/@item.BlogCategory.Slug/@item.Slug">
+                                                <h4 style="margin-top: 18px;">@slitString.TruncateAtWord(item.Title, 30)</h4>
+                                            </a>                           <p>
+                                                @slitString.TruncateAtWord(item.Description, 130)<br />
+                                                <a class="more" href="/@item.BlogCategory.Slug/@item.Slug">Xem thêm</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+
+                    }*@
+
+
+                    @* <div class="column1">
+                         <div class="column_inner">
+                             <img class="" alt="i" src="/Images/News/News_01.jpg" width="320" height="180"><p></p>
+                             <h4 style="margin-top: 18px;">Giới thiệu mô hình Bè du lịch Labixa</h4>
+                             <p>Ngày 12-12-2013, Công ty TNHH Dịch vụ Lặn Biển Xanh tổ chức chương trình “Ngày hội tri ân khách hàng và tham quan mô hình Bè du lịch.
+                                 <a  href="#">Xem thêm</a></p>
+                         </div>
+                     </div>
+                    <div class="column2">
+                         <div class="column_inner">
+                             <img class="" alt="ii" src="/Images/News/News_02.jpg" width="320" height="180"><p></p>
+                             <h4 style="margin-top: 18px;">Labixa: Sôi động mùa hè</h4>
+                             <p>Bỏ lại những lo toan, bận rộn của công việc và học hành, mùa hè là thời điểm lý tưởng để tiến hành những chuyến đi du lịch cùng bạn bè, người thân, gia đình
+                                 <a href="#">Xem thêm</a></p>
+                         </div>
+                     </div>
+                     <div class="column3">
+                         <div class="column_inner">
+                             <img class="" alt="ii" src="/Images/News/bannerPromotion.png" width="320" height="180"><p></p>
+                             <h4 style="margin-top: 18px;">Labixa: Sôi động mùa hè</h4>
+                             <p>Bỏ lại những lo toan, bận rộn của công việc và học hành, mùa hè là thời điểm lý tưởng để tiến hành những chuyến đi du lịch cùng bạn bè, người thân, gia đình
+                                 <a href="#">Xem thêm</a></p>
+                         </div>
+                     </div>
+                     <div class="column1">
+                         <div class="column_inner">
+                             <img class="" alt="i" src="/Images/News/News_01.jpg" width="320" height="180"><p></p>
+                             <h4 style="margin-top: 18px;">  Giới thiệu mô hình Bè du lịch Labixa</h4>
+                             <p>Ngày 12-12-2013, Công ty TNHH Dịch vụ Lặn Biển Xanh tổ chức chương trình “Ngày hội tri ân khách hàng và tham quan mô hình Bè du lịch.
+                                 <a href="#">Xem thêm</a></p>
+                         </div>
+                     </div>*@
+
+                </div>
+                <div style="margin-top:30px;margin-bottom:30px;background-color: transparent;" class="separator"></div>
+                <div>
+
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("HomePageNews", new { page, slug = ViewBag.slug, currentFilter = ViewBag.CurrentFilter }))
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--END TOUR -->
+</div>

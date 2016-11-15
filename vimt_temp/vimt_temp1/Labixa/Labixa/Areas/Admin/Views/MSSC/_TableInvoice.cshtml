@@ -1,0 +1,190 @@
+﻿@section scripts{
+    <script src="/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+    <link href="~/Content/StatusColor.css" rel="stylesheet" />
+}
+
+
+@using Outsourcing.Core.Common;
+@model IEnumerable<Outsourcing.Data.Models.Invoice>
+
+
+
+
+
+
+
+
+@* ======================================================================================= *@
+<div id="c_b">
+    <table id="productTable" class="table table-bordered table-striped table-fixed-header">
+        <thead>
+            <tr role="row">
+                <th>STT</th>
+                <th>Vendor Name</th>
+                <th>Total Payment</th>
+                <th>WWID Request</th>
+                @*<th>Status</th>*@
+                <th>Is CDS</th>
+                <th>Create Date</th>
+                <th></th>
+                @*<th>Status</th>*@
+
+
+            </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+            @if (Model.Count() > 0)
+            {
+                int count = 0;
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr class="odd">
+                        @{
+                    String isReject = item.UserInvoices.LastOrDefault().isReject.ToString();
+                    isReject = StringConvert.ConvertShortName(isReject);
+
+
+                        }
+                        <td class=" sorting_1">@count</td>
+                        <td class="hidden-480 ">@item.InvoiceItems.FirstOrDefault().ItemVendor.Vendor.VendorName</td>
+                        @{
+                    double money = double.Parse(item.totalPayment.ToString());
+                    String convert = MoneyConvert.So_chu(money);
+                        }
+
+                        <td class="hidden-480 ">@item.totalPayment.ToString("##,###,##0")<br />@*(@convert)*@</td>
+                        <td class="hidden-480 ">@item.Note.ToString().Split('|').FirstOrDefault()</td>
+                        <td class="hidden-480 ">@item.IsCDS</td>
+                        <td class="hidden-480 ">@item.UserInvoices.FirstOrDefault().CreatedDate.ToShortDateString()</td>
+                        <td><input type="checkbox" value="@item.totalPayment|@item.Id"></td>
+                  
+
+                        @*<td class="hidden-480 "><span class="@isReject">@item.UserInvoices.LastOrDefault().isReject</span></td>*@
+                        @*<td class="hidden-480 ">@item.UserInvoices.LastOrDefault().isReject</td>*@
+
+
+                        @*<td class=" ">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+                                    <a href="/Admin/Booking/Edit?productId=@item.Id" class="btn btn-xs btn-info">
+                                        <i class="icon-edit bigger-160"></i>
+                                    </a>
+                                    <a href="/Admin/Product/Delete?productId=@item.Id" class="btn btn-xs btn-danger">
+                                        <i class="icon-trash bigger-160"></i>
+                                    </a>
+                                </div>
+                            </td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@*<textarea id="t"></textarea>
+<textarea id="t1"></textarea>
+<textarea id="t3"></textarea>*@
+Remaining amount:<textarea id="t2"  ></textarea>
+
+
+<script type="text/javascript">
+
+    function updateTextArea() {
+        var allVals = [];
+        var listId = [];
+        $('#c_b :checked').each(function () {
+            allVals.push($(this).val());
+
+        });
+      //  $('#t').val(allVals);
+        var sum = 0;
+        var listInv = "";
+        
+        for (i = 0; i < allVals.length; i++) {
+            var b = "" + allVals[i];
+           var arr = b.split('|')
+           listInv += arr[1] + "|";
+
+           // var item = parseInt(allVals[i]);
+
+            var item = parseInt(arr[0]);
+            sum += item;
+         
+        }
+       // $('#t1').val(sum);
+       // $('#t3').val(listInv);
+        changeCookie(listInv);
+
+        var amount = '@Session["amount"]';
+
+        //$('#t2').val(amount-sum);
+        if(sum == amount)
+        {
+            $("#save").show();
+        }
+        else $("#save").hide();
+    }
+
+    $(function () {
+        $('#c_b input').click(updateTextArea);
+        // updateTextArea();
+    });
+
+
+
+
+
+
+
+    function delete_cookie(name) {
+        var cname = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ')
+                c = c.substring(1);
+            if (c.indexOf(cname) != -1)
+                document.cookie = name + '=; expires=-1;';
+        }
+
+    }
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function changeCookie(list) {
+        delete_cookie("_listInvId");
+        var username = getCookie("_listInvId");
+        if (username != "") {
+            delete_cookie("_listInvId");
+            setCookie("_listInvId", list, 1);
+          //  var username2 = getCookie("_culture");
+        } else {
+
+            setCookie("_listInvId", list, 1);
+        //    var username3 = getCookie("_culture");
+
+        }
+        
+    }
+
+
+</script>

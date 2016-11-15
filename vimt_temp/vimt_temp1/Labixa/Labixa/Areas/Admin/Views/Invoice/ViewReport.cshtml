@@ -1,0 +1,137 @@
+﻿@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+<link href="~/Content/StatusColor.css" rel="stylesheet" />
+}
+
+
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/Invoice">View Report</a>
+                @*<a href="/Admin/Product">Manage Invoice</a>*@
+            </li>
+            <li class="active">View Report</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<div class="alert alert-block alert-info">
+                    Add new invoice
+                </div>*@
+            @*@using (Html.BeginForm("CreateItem", "Invoice", null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {*@
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab1">
+                            <i class="green icon icon-home bigger-120"></i>
+                            View Report
+                        </a>
+                    </li>
+
+                </ul>
+
+            
+
+
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane fade active in">
+
+                        @*@Html.DisplayNameFor(model => model.ListVendors)*@
+                        Start Date:
+                        <div class="form-group ">
+                            <div class="col-sm-9">
+                                <input type="date" name="StartDate" id="StartDate" />
+                            </div>
+                        </div>
+
+                        <br /><br /><br />
+                        End Date:
+                        <div class="form-group ">
+                            <div class="col-sm-9">
+                                <input type="date" name="EndDate" id="EndDate" />
+                                <a href="javascript:void(0)" onclick="Additem();" class="btn btn-info" style="margin:-8px 0px 0px 8px" id="save">Save</a>
+                            </div>
+                        </div>
+
+                        <br />
+
+                    </div>
+
+
+
+                    <script>
+                        function Additem() {
+
+                            var StartDate = $("#StartDate").val();
+                            var EndDate = $("#EndDate").val();
+                          //  var ItemVendorId = $("#ItemVendorId").val();
+
+                            if (StartDate > EndDate)
+                            {
+                                alert("The end date you entered occurs before the start date.")
+                            }
+                            else {
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Invoice/ShowInvAjax",
+                                    data: { start: StartDate, end: EndDate },
+                                    success: function (data) {
+                                        $(".item-list").html(data);                                     
+                                    },
+                                });
+
+                            }
+                        }
+
+
+                        //$(document).ready(function () {
+                        //    $(document).ajaxStart(function () {
+                        //        $("#wait").css("display", "block");
+                        //    });
+                        //    $(document).ajaxComplete(function () {
+                        //        $("#wait").css("display", "none");
+                        //    });
+
+                        ////});
+
+                    </script>
+
+
+                    <div id="wait" style="position:fixed;    display:none;width:69px;height:89px;top:50%;left:50%;padding:2px;">
+                        <img src='~/Content/VIMT/loading1.gif' width="120" height="120" /> <br>Loading..
+                    </div>
+                    <br />
+                    <div class="item-list" id="item-list">
+
+                    </div>
+                    @*<a href="/Invoice" class="btn btn-close">Done</a>*@
+                </div>
+
+
+
+                @*
+                    partial for group button
+                *@
+                @*      @Html.Partial("_PartialButtonGroup", "/Admin/Invoice")*@
+            </div>
+
+
+        </div>
+    </div>
+</div>
